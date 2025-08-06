@@ -48,4 +48,18 @@ public class EventService {
 
         return eventMapper.toResponseDTO(event);
     }
+
+    public EventResponseDTO updateEvent(Long id, EventRequestDTO requestDTO) {
+        Event existingEvent = eventRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Event not found."));
+
+        existingEvent.setName(requestDTO.name());
+        existingEvent.setDescription(requestDTO.description());
+        existingEvent.setDate(requestDTO.date());
+        existingEvent.setLocal(requestDTO.Local());
+
+        Event updatedEvent = eventRepository.save(existingEvent);
+
+        return eventMapper.toResponseDTO(updatedEvent);
+    }
 }
