@@ -41,4 +41,11 @@ public class EventService {
                 .map(eventMapper::toResponseDTO)
                 .collect(Collectors.toList());
     }
+
+    public EventResponseDTO getEventById(Long id) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Event not found."));
+
+        return eventMapper.toResponseDTO(event);
+    }
 }
