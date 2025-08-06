@@ -62,4 +62,11 @@ public class EventService {
 
         return eventMapper.toResponseDTO(updatedEvent);
     }
+
+    public void deleteEvent(Long id) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Event not found."));
+
+        eventRepository.deleteById(event.getId());
+    }
 }
