@@ -8,6 +8,9 @@ import com.kawann.events.dev.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class EventService {
 
@@ -30,5 +33,12 @@ public class EventService {
         Event savedEvent = eventRepository.save(newEvent);
 
         return eventMapper.toResponseDTO(savedEvent);
+    }
+
+    public List<EventResponseDTO> getAllEvents() {
+        return eventRepository.findAll()
+                .stream()
+                .map(eventMapper::toResponseDTO)
+                .collect(Collectors.toList());
     }
 }
