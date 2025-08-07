@@ -38,4 +38,10 @@ public class EventController {
         EventResponseDTO event = eventService.getEventById(id);
         return ResponseEntity.ok(event);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EventResponseDTO> updateEvent(@PathVariable Long id, @RequestBody EventRequestDTO eventDTO) {
+        EventResponseDTO updatedEvent = eventService.updateEvent(id, eventDTO);
+        return ResponseEntity.ok(updatedEvent);
+    }
 }
