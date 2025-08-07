@@ -26,4 +26,10 @@ public class EventController {
         EventResponseDTO newEvent = eventService.createEvent(eventDTO);
         return new ResponseEntity<>(newEvent, HttpStatus.CREATED);
     }
+
+    @GetMapping
+    public ResponseEntity<List<EventResponseDTO>> getAllEvents() {
+        List<EventResponseDTO> events = eventService.getAllEvents();
+        return ResponseEntity.ok(events);
+    }
 }
